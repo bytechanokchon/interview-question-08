@@ -20,7 +20,6 @@
   <ItemGroup>
     <Folder Include="Dtos\Requests\" />
     <Folder Include="Handlers\Quizs\Commands\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>

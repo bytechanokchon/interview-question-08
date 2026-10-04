@@ -1,5 +1,5 @@
 using Application;
-using Infratructure;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationDependencyInjection();
-builder.Services.AddInfrastructureDependencyInjection();
+builder.Services.AddInfrastructureDependencyInjection(builder.Configuration);
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
