@@ -1,4 +1,4 @@
-﻿namespace Application.Dtos.Responses
+﻿namespace Application.Dtos.Shareds
 {
     public class BaseResponseDto<T>
     {

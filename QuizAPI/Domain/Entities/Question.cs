@@ -7,7 +7,7 @@
         public required string Title { get; set; }
         public required DateTime CreatedAt { get; set; }
 
-        public required Quiz Quiz { get; set; }
-        public required List<ResultOption> ResultOptions { get; set; }
+        public Quiz Quiz { get; set; } = null!;
+        public List<ResultOption> ResultOptions { get; set; } = null!;
     }
 }

@@ -8,6 +8,6 @@
         public required bool IsCorrect { get; set; }
         public required DateTime CreatedAt { get; set; }
 
-        public required Question Question { get; set; }
+        public Question Question { get; set; } = null!;
     }
 }

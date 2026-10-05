@@ -1,4 +1,4 @@
-﻿using Application.Dtos.Responses;
+﻿using Application.Dtos.Shareds;
 using Domain.Enums;
 using MediatR;
 

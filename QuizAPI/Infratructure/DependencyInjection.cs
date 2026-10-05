@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Infrastructure.Persistences;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,8 @@ namespace Infrastructure
 
                 config.UseMySQL(connectionString);
             });
+
+            services.AddScoped<IServiceUnitOfWork, ServiceUnitOfWork>();
 
             return services;
         }

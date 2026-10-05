@@ -1,4 +1,6 @@
-﻿using Application.Handlers.Quizs.Queries;
+﻿using Application.Dtos.Requests;
+using Application.Handlers.Quizs.Commands;
+using Application.Handlers.Quizs.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +15,13 @@ namespace Presentation.Controllers
         public QuizController(IMediator mediator)
         {
             this._mediator = mediator;
+        }
+
+        [HttpPost()]
+        public async Task<IActionResult> CreateQuiz(QuizRequestDto quizRequestDto)
+        {
+            var result = await this._mediator.Send(new CreateQuizCommand(quizRequestDto));
+            return Ok(result);
         }
 
         [HttpGet("HealthCheckup")]

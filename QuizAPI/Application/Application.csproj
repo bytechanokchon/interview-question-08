@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Requests\" />
-    <Folder Include="Handlers\Quizs\Commands\" />
+    <Folder Include="Dtos\Responses\" />
   </ItemGroup>
 
 </Project>
