@@ -87,5 +87,96 @@ namespace Infrastructure.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task UpdateQuizAsync(int quizId, string title, CancellationToken cancellationToken)
+        {
+            Quiz? entity = await this._context.Quizs.Where(x => x.Id == quizId).FirstOrDefaultAsync();
+
+            if (entity != null)
+            {
+                entity.Title = title;
+
+                this._context.Quizs.Update(entity);
+                await this._context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task<int> AddQuestionAsync(int quizId, string title, CancellationToken cancellationToken)
+        {
+            Question entity = new Question()
+            {
+                QuizId = quizId,
+                Title = title,
+                CreatedAt = DateTime.Now,
+            };
+
+            await this._context.Questions.AddAsync(entity);
+            await this._context.SaveChangesAsync(cancellationToken);
+
+            return entity.Id;
+        }
+
+        public async Task UpdateQuestionAsync(int questionId, string title, CancellationToken cancellationToken)
+        {
+            Question? entity = await this._context.Questions.Where(x => x.Id == questionId).FirstOrDefaultAsync();
+
+            if (entity != null)
+            {
+                entity.Title = title;
+
+                this._context.Questions.Update(entity);
+                await this._context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task DeleteQuestionAsync(int questionId, CancellationToken cancellationToken)
+        {
+            Question? entity = await this._context.Questions.Where(x => x.Id == questionId).FirstOrDefaultAsync();
+
+            if (entity != null)
+            {
+                this._context.Questions.Remove(entity);
+                await this._context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task AddResultOptionAsync(int questionId, string title, bool isCorrect, CancellationToken cancellationToken)
+        {
+            ResultOption entity = new ResultOption()
+            {
+                QuestionId = questionId,
+                Title = title,
+                IsCorrect = isCorrect,
+                CreatedAt = DateTime.Now
+            };
+
+            await this._context.ResultOptions.AddAsync(entity);
+            await this._context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task UpdateResultOptionAsync(int resultOptionId, string title, bool isCorrect, CancellationToken cancellationToken)
+        {
+            ResultOption? entity = await this._context.ResultOptions.Where(x => x.Id == resultOptionId).FirstOrDefaultAsync();
+
+            if (entity != null)
+            {
+                entity.Title = title;
+                entity.IsCorrect = isCorrect;
+
+                this._context.ResultOptions.Update(entity);
+                await this._context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task RemoveResultOptionAsync(int resultOptionId, CancellationToken cancellationToken)
+        {
+            ResultOption? entity = await this._context.ResultOptions.Where(x => x.Id == resultOptionId).FirstOrDefaultAsync();
+
+            if (entity != null)
+            {
+                this._context.ResultOptions.Remove(entity);
+                await this._context.SaveChangesAsync(cancellationToken);
+            }
+        }
     }
 }

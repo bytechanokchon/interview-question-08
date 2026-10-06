@@ -44,5 +44,12 @@ namespace Presentation.Controllers
             var result = await this._mediator.Send(new GetQuizDetailQuery(quizId));
             return Ok(result);
         }
+
+        [HttpPatch]
+        public async Task<IActionResult> UpdateQuizDetail(QuizUpdateRequestDto requestDto)
+        {
+            var result = await this._mediator.Send(new UpdateQuizCommand(requestDto));
+            return Ok(result);
+        }
     }
 }
