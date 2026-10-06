@@ -2,7 +2,8 @@
 {
     public class ResultOptionDto
     {
+        public int? Id { get; set; }
         public required string Title { get; set; }
-        public required bool IsCorrect { get; set; }
+        public bool? IsCorrect { get; set; }
     }
 }

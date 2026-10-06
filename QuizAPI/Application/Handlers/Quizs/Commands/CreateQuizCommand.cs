@@ -40,7 +40,6 @@ namespace Application.Handlers.Quizs.Commands
 
                     questionDtos.Add(new QuestionDto()
                     {
-                        QuizId = quizId,
                         Title = questionRequestDto.Title,
                         ResultOptions = resultOptionDtos
                     });

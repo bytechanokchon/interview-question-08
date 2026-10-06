@@ -37,5 +37,12 @@ namespace Presentation.Controllers
             var result = await this._mediator.Send(new GetQuizQuery());
             return Ok(result);
         }
+
+        [HttpGet("{quizId}")]
+        public async Task<IActionResult> GetQuizDetail([FromRoute] int quizId)
+        {
+            var result = await this._mediator.Send(new GetQuizDetailQuery(quizId));
+            return Ok(result);
+        }
     }
 }

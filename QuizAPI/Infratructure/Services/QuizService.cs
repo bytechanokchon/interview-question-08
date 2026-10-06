@@ -38,7 +38,7 @@ namespace Infrastructure.Services
             {
                 List<ResultOption> resultOptionEntities = question.ResultOptions.Select(x => new ResultOption()
                 {
-                    IsCorrect = x.IsCorrect,
+                    IsCorrect = Convert.ToBoolean(x.IsCorrect),
                     Title = x.Title,
                     CreatedAt = createdAt
                 })
@@ -67,6 +67,25 @@ namespace Infrastructure.Services
                 CreatedAt = x.CreatedAt
             })
             .ToListAsync();
+        }
+
+        public async Task<List<QuestionDto>> GetQuestionsByQuizIdAsync(int quizId)
+        {
+            return await this._context.Questions
+                .Include(x => x.ResultOptions)
+                .Where(x => x.QuizId == quizId)
+                .Select(x => new QuestionDto()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    ResultOptions = x.ResultOptions.Select(y => new ResultOptionDto()
+                    {
+                        Id = y.Id,
+                        Title = y.Title
+                    })
+                    .ToList()
+                })
+                .ToListAsync();
         }
     }
 }
