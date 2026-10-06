@@ -51,5 +51,12 @@ namespace Presentation.Controllers
             var result = await this._mediator.Send(new UpdateQuizCommand(requestDto));
             return Ok(result);
         }
+
+        [HttpDelete("{quizId}")]
+        public async Task<IActionResult> DeleteQuiz([FromRoute] int quizId)
+        {
+            var result = await this._mediator.Send(new DeleteQuizCommand(quizId));
+            return Ok(result);
+        }
     }
 }

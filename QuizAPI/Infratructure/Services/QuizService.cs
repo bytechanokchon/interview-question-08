@@ -178,5 +178,20 @@ namespace Infrastructure.Services
                 await this._context.SaveChangesAsync(cancellationToken);
             }
         }
+
+        public async Task DeleteQuizAsync(int quizId, CancellationToken cancellationToken)
+        {
+            Quiz? entity = await this._context.Quizs
+                .Include(x => x.Questions)
+                    .ThenInclude(x => x.ResultOptions)
+                .Where(x => x.Id == quizId)
+                .FirstOrDefaultAsync();
+
+            if (entity != null)
+            {
+                this._context.Quizs.Remove(entity);
+                await this._context.SaveChangesAsync(cancellationToken);
+            }
+        }
     }
 }
