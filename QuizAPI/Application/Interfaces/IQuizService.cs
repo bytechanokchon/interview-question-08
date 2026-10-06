@@ -17,5 +17,6 @@ namespace Application.Interfaces
         Task RemoveResultOptionAsync(int resultOptionId, CancellationToken cancellationToken);
         Task DeleteQuizAsync(int quizId, CancellationToken cancellationToken);
         Task<List<QuestionResultDto>> GetQuizResultsAsync(int quizId);
+        Task<QuizDto> GetQuizDetailByIdAsync(int quizId);
     }
 }

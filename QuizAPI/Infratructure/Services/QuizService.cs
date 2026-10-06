@@ -81,7 +81,8 @@ namespace Infrastructure.Services
                     ResultOptions = x.ResultOptions.Select(y => new ResultOptionDto()
                     {
                         Id = y.Id,
-                        Title = y.Title
+                        Title = y.Title,
+                        IsCorrect = y.IsCorrect
                     })
                     .ToList()
                 })
@@ -221,6 +222,17 @@ namespace Infrastructure.Services
             }
 
             return result;
+        }
+
+        public async Task<QuizDto> GetQuizDetailByIdAsync(int quizId)
+        {
+            return await this._context.Quizs.Where(x => x.Id == quizId).Select(x => new QuizDto()
+            {
+                Id = x.Id,
+                Title = x.Title,
+                CreatedAt = x.CreatedAt
+            })
+            .FirstAsync();
         }
     }
 }

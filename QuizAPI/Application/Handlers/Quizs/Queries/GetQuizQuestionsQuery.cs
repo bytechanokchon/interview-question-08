@@ -7,25 +7,25 @@ using MediatR;
 
 namespace Application.Handlers.Quizs.Queries
 {
-    public class GetQuizDetailQuery : IRequest<BaseResponseDto<QuizDetailResponseDto>>
+    public class GetQuizQuestionsQuery : IRequest<BaseResponseDto<QuizDetailResponseDto>>
     {
-        public GetQuizDetailQuery(int quizId)
+        public GetQuizQuestionsQuery(int quizId)
         {
             this.QuizId = quizId;
         }
 
         public int QuizId { get; set; }
 
-        public class GetQuizDetailQueryHandler : IRequestHandler<GetQuizDetailQuery, BaseResponseDto<QuizDetailResponseDto>>
+        public class GetQuizQuestionsQueryHandler : IRequestHandler<GetQuizQuestionsQuery, BaseResponseDto<QuizDetailResponseDto>>
         {
             private readonly IServiceUnitOfWork _serviceUnitOfWork;
 
-            public GetQuizDetailQueryHandler(IServiceUnitOfWork serviceUnitOfWork)
+            public GetQuizQuestionsQueryHandler(IServiceUnitOfWork serviceUnitOfWork)
             {
                 this._serviceUnitOfWork = serviceUnitOfWork;
             }
 
-            public async Task<BaseResponseDto<QuizDetailResponseDto>> Handle(GetQuizDetailQuery request, CancellationToken cancellationToken)
+            public async Task<BaseResponseDto<QuizDetailResponseDto>> Handle(GetQuizQuestionsQuery request, CancellationToken cancellationToken)
             {
                 QuizDto quizDto = await this._serviceUnitOfWork.QuizService.GetQuizDetailByIdAsync(request.QuizId);
 
@@ -38,7 +38,7 @@ namespace Application.Handlers.Quizs.Queries
                     {
                         Id = Convert.ToInt32(x.Id),
                         Title = x.Title,
-                        IsCorrect = Convert.ToBoolean(x.IsCorrect)
+                        IsCorrect = null
                     })
                     .ToList();
 
