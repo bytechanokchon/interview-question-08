@@ -6,5 +6,6 @@ namespace Application.Interfaces
     {
         Task<int> CreateQuizAsync(string title, CancellationToken cancellationToken);
         Task AddQuestionsAsync(int quizId, List<QuestionDto> questions, CancellationToken cancellationToken);
+        Task<List<QuizDto>> GetQuizs();
     }
 }

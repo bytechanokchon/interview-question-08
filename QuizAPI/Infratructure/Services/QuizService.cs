@@ -1,7 +1,7 @@
-﻿using Application.Dtos;
-using Application.Dtos.Services;
+﻿using Application.Dtos.Services;
 using Application.Interfaces;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services
 {
@@ -56,6 +56,17 @@ namespace Infrastructure.Services
             await this._context.Questions.AddRangeAsync(questionEntities);
 
             await this._context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<List<QuizDto>> GetQuizs()
+        {
+            return await this._context.Quizs.Select(x => new QuizDto()
+            {
+                Id = x.Id,
+                Title = x.Title,
+                CreatedAt = x.CreatedAt
+            })
+            .ToListAsync();
         }
     }
 }

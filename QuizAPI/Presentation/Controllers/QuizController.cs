@@ -17,17 +17,24 @@ namespace Presentation.Controllers
             this._mediator = mediator;
         }
 
-        [HttpPost()]
+        [HttpGet("HealthCheckup")]
+        public async Task<IActionResult> GetHealthCheckup()
+        {
+            var result = await this._mediator.Send(new GetHealthCheckupQuery());
+            return Ok(result);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateQuiz(QuizRequestDto quizRequestDto)
         {
             var result = await this._mediator.Send(new CreateQuizCommand(quizRequestDto));
             return Ok(result);
         }
 
-        [HttpGet("HealthCheckup")]
-        public async Task<IActionResult> GetHealthCheckup()
+        [HttpGet]
+        public async Task<IActionResult> GetQuizs()
         {
-            var result = await this._mediator.Send(new GetHealthCheckupQuery());
+            var result = await this._mediator.Send(new GetQuizQuery());
             return Ok(result);
         }
     }
