@@ -58,5 +58,12 @@ namespace Presentation.Controllers
             var result = await this._mediator.Send(new DeleteQuizCommand(quizId));
             return Ok(result);
         }
+
+        [HttpPost("CheckResults")]
+        public async Task<IActionResult> CheckResult(CheckScoreRequestDto checkScoreRequestDto)
+        {
+            var result = await this._mediator.Send(new CheckResultQuery(checkScoreRequestDto));
+            return Ok(result);
+        }
     }
 }

@@ -193,5 +193,34 @@ namespace Infrastructure.Services
                 await this._context.SaveChangesAsync(cancellationToken);
             }
         }
+
+        public async Task<List<QuestionResultDto>> GetQuizResultsAsync(int quizId)
+        {
+            var quiz = await this._context.Quizs
+                .Include(x => x.Questions)
+                    .ThenInclude(x => x.ResultOptions)
+                .Where(x => x.Id == quizId)
+                .FirstOrDefaultAsync();
+
+            List<QuestionResultDto> result = new List<QuestionResultDto>();
+            if (quiz.Questions != null)
+            {
+                foreach (var question in quiz.Questions)
+                {
+                    var correctResultOption = question.ResultOptions.Where(x => x.IsCorrect == true).FirstOrDefault();
+
+                    if (correctResultOption != null)
+                    {
+                        result.Add(new QuestionResultDto()
+                        {
+                            QuestionId = question.Id,
+                            ResultOptionId = correctResultOption.Id
+                        });
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }
