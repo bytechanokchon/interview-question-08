@@ -167,4 +167,8 @@ export class QuizDetail {
   startQuiz() {
     this.router.navigate([`/quiz/${this.quizId}/test`]);
   }
+
+  onCancel() {
+    this.router.navigate(['']);
+  }
 }
