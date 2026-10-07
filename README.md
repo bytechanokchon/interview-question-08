@@ -41,7 +41,6 @@ Then run:
 
 ### 2. Create/Update quiz
 ![Create update quiz](./images/create-update-quiz.png)
-![alt text](image.png)
 
 - You can add multiple question
 - You can set one of choice is answer
