@@ -99,9 +99,9 @@ export class QuizDetail {
           this.questionDeletes.push(question);
           continue;
         }
+      } else {
+        questionTemps.push(question);
       }
-
-      questionTemps.push(question);
     }
 
     this.questions = questionTemps;
